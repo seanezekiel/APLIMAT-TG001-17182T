@@ -27,8 +27,8 @@ namespace aplimat_labs
         private const float GRAPH_LIMIT = 15;
         private const int TOTAL_CIRCLE_ANGLE = 360;
 
-        private Vector3 a = new Vector3(15, 15, 0);
-        private Vector3 b = new Vector3(-2, 10, 0);
+        //private Vector3 a = new Vector3(15, 15, 0);
+        //private Vector3 b = new Vector3(-2, 10, 0);
 
         private const int one = 0;
         private const int two = 1;
@@ -47,7 +47,10 @@ namespace aplimat_labs
         public MainWindow()
         {
             InitializeComponent();
-            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
+
+            myVector = a;
+            Console.WriteLine(myVector.GetMagnitude());
+            //this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
 
             //Vector3 c = a + b;
             //Console.WriteLine("vector c values: x:" + c.x + "y:" + c.y + " z:" + c.z);
@@ -60,6 +63,13 @@ namespace aplimat_labs
         //private Randomizer rng = new Randomizer(-1, 1);
         private CubeMesh myCube = new CubeMesh();
         private Vector3 velocity = new Vector3(1, 0, 0);
+        private float speed = 2.0f;
+
+        private Vector3 myVector = new Vector3();
+        private Vector3 a = new Vector3(5, 7, 0);
+        //private Vector3 b = new Vector3(-7, -6, 0);
+
+
 
         //private List<CubeMesh> myCubes = new List<CubeMesh>();
 
@@ -67,34 +77,68 @@ namespace aplimat_labs
         {
             OpenGL gl = args.OpenGL;
             this.Title = "Vectors";
+
+            myVector = a;
+
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.LoadIdentity();
 
             gl.Translate(0.0f, 0.0f, -50.0f);
 
+
+
+            //OpenGL.GL_LINE_WIDTH(1.0f, 1.0f, 0);
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Begin(OpenGL.GL_LINE_STRIP);
+            gl.Vertex(15, 0);
+            gl.Vertex(a.x, a.y);
+            gl.End();
+        
+
+            //gl.Color(1.0f, 0.0f, 0.0f);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(0, 0);
+            //gl.Vertex(a.x, a.y);
+            //gl.End();
+
+            //gl.Color(0.0f, 1.0f, 0.0f);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(0, 0);
+            //gl.Vertex(a.x, a.y);
+            //gl.Vertex(b.x, b.y);
+            //gl.End();
+
+            //gl.Color(0.0f, 0.0f, 1.0f);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(b.x, b.y);
+            //gl.Vertex(0,0);
+            //gl.End();
+
+            //gl.DrawText(0, 0, 1, 1, 1 "Arial", 15, "myVector magnitude");
+
             //CubeMesh myCube = new CubeMesh();
             //myCube.Position = new Vector3(Gaussian.Generate(0, 15), yAxis.GenerateDouble(), 0);
             //myCubes.Add(myCube);
 
-            myCube.Draw(gl);
-            myCube.Position += velocity;
+            // myCube.Draw(gl);
+            // myCube.Position += velocity * speed;
 
-            if (myCube.Position.x >= 10.0f)
-            {
-                velocity.x = -1;
-            }
-            if (myCube.Position.x <= -10.0f)
-            {
-                velocity.x = 1;
-            }
-            if (myCube.Position.x >= 10.0f)
-            {
-                velocity.y = -1;
-            }
-            if (myCube.Position.y <= -10.0f)
-            {
-                velocity.y = 1;
-            }
+            // if (myCube.Position.x >= 20.0f)
+            // {
+            //     velocity.x = -1;
+            // }
+            //else if (myCube.Position.x <= -10.0f)
+            // {
+            //     velocity.x = 1;
+            // }
+            // if (myCube.Position.y >= 10.0f)
+            // {
+            //     velocity.y = -1;
+            // }
+            // else if (myCube.Position.y <= -10.0f)
+            // {
+            //     velocity.y = 1;
+            // }
             //if (myCube.Position.y >= 30.0f)
             //{
             //    velocity.x = -1;
