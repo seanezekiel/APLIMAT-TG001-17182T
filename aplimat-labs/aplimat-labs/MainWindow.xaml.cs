@@ -58,79 +58,61 @@ namespace aplimat_labs
         }
         //private CubeMesh myCube = new CubeMesh();
         //private Randomizer rng = new Randomizer(-1, 1);
+        private CubeMesh myCube = new CubeMesh();
+        private Vector3 velocity = new Vector3(1, 0, 0);
 
-        private List<CubeMesh> myCubes = new List<CubeMesh>();
+        //private List<CubeMesh> myCubes = new List<CubeMesh>();
 
         private void OpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
         {
             OpenGL gl = args.OpenGL;
+            this.Title = "Vectors";
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.LoadIdentity();
 
-            gl.Translate(0.0f, 0.0f, -100.0f);
+            gl.Translate(0.0f, 0.0f, -50.0f);
 
-            CubeMesh myCube = new CubeMesh();
-            myCube.Position = new Vector3(Gaussian.Generate(0, 15), yAxis.GenerateDouble(), 0);
-            myCubes.Add(myCube);
+            //CubeMesh myCube = new CubeMesh();
+            //myCube.Position = new Vector3(Gaussian.Generate(0, 15), yAxis.GenerateDouble(), 0);
+            //myCubes.Add(myCube);
+
+            myCube.Draw(gl);
+            myCube.Position += velocity;
+
+            if (myCube.Position.x >= 10.0f)
+            {
+                velocity.x = -1;
+            }
+            if (myCube.Position.x <= -10.0f)
+            {
+                velocity.x = 1;
+            }
+            if (myCube.Position.x >= 10.0f)
+            {
+                velocity.y = -1;
+            }
+            if (myCube.Position.y <= -10.0f)
+            {
+                velocity.y = 1;
+            }
+            //if (myCube.Position.y >= 30.0f)
+            //{
+            //    velocity.x = -1;
+            //}
+            //if (myCube.Position.y <= 30.0f)
+            //{
+            //    velocity.y = 1;
+            //}
             //CubeMesh myCube2 = new CubeMesh();
             //myCube2.Position = new Vector3(Generate(-20, 20),0);
             //myCubes.Add(myCube2);
 
-            foreach (var cube in myCubes)
-            {
-                //gl.Color(RGB.Generate(), RGB.Generate(), RGB.Generate());
-                cube.Draw(gl);
-            }
-
-
-
-            //switch (rng.Generate())
+            //foreach (var cube in myCubes)
             //{
-            //    case one:
-            //        myCube.Position += new Vector3(0, 0.1f, 0);//up
-            //        break;
-
-            //    case two:
-            //        myCube.Position += new Vector3(-0.1f, 0, 0);//left
-            //        break;
-
-            //    case three:
-            //        myCube.Position += new Vector3(0.1f, 0, 0);//right
-            //        break;
-
-            //    case four:
-            //        myCube.Position += new Vector3(0, -0.1f, 0);//down
-            //        break;
-
-            //    case five:
-            //        myCube.Position += new Vector3(0.1f, 0.1f, 0);
-            //        break;
-
-            //    case six:
-            //        myCube.Position += new Vector3(-0.1f, -0.1f, 0);
-            //        break;
-
-            //    case seven:
-            //        myCube.Position += new Vector3(-0.1f, 0.1f, 0);
-            //        break;
-
-            //    case eight:
-            //        myCube.Position += new Vector3(-0.1f, 0.1f, 0);
-            //        break;
+            ////    //gl.Color(RGB.Generate(), RGB.Generate(), RGB.Generate());
+            //    cube.Draw(gl);
             //}
 
-            //myCube.Draw(gl);
-
-            //myCube.Position += new Vector3(0, 0.1f, 0);
-
-
-
-            ////gl.Color(0, 1, 0);
-            //DrawCartesianPlane(gl); //draw cartesian plane with unit lines
-            //DrawPoint(gl, 1, 1); //draw a point with coordinates (1, 1)
-            //DrawLinearFunction(gl);
-            //DrawQuadraticFunction(gl);
-            //DrawCircle(gl);
         }
 
 
